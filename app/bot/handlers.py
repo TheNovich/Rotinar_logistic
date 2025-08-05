@@ -6,9 +6,11 @@ from app.bot.utils import role_required, search_number, on_click_manager_panel, 
 'Импорт функций из собственного функцинала'
 from app.database.crud import set_role_db
 from app.bot.utils import save_order_to_db
-from app.bot.utils import format_order
+'''from app.bot.utils import format_order
 from app.bot.utils import create_order
-from app.bot.utils import temp_orders
+from app.bot.utils import temp_orders'''
+from app.bot.order_creation import create_order, temp_orders, format_order
+from config import config
 
 from app.bot.instance import bot
 
@@ -38,9 +40,11 @@ def start_handler(message):
 @role_required('manager', 'admin')
 def manager_panel(message):
     markup = types.ReplyKeyboardMarkup()
-    free_drivers_button = types.KeyboardButton('Свободные водители')
-    create_new_order = types.KeyboardButton('📝 Создать заказ')
-    markup.row(free_drivers_button, create_new_order)
+    buttons = []
+    buttons.append(types.KeyboardButton('Свободные водители'))
+    if config.USE_NEW_ORDER_FLOW:
+        buttons.append(types.KeyboardButton('📝 Создать заказ'))
+    markup.row(*buttons)
     bot.send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
     bot.register_next_step_handler(message, lambda msg: on_click_manager_panel(msg, manager_panel))
 
@@ -73,7 +77,7 @@ def handle_order_confirmation(call):
         # Удаляем временные данные
         if int(chat_id) in temp_orders:
             del temp_orders[int(chat_id)]
-        create_order(call.message)
+        create_order(call.message, manager_panel)
 
     bot.answer_callback_query(call.id)
 
@@ -102,7 +106,7 @@ def driver_panel(message):
         driver_loading_car_button = types.KeyboardButton('Завершить заказ')
         markup.row(driver_loading_car_button)
     elif driver_state.data[0]['state_id'] == 5:
-        driver_take_order_button = types.KeyboardButton('Взять заказ')
+        driver_take_order_button = types.KeyboardButton('Еду на загрузку')
         markup.row(driver_take_order_button)
 
     bot.send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
