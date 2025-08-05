@@ -5,7 +5,10 @@ from app.bot.utils import role_required, search_number, on_click_manager_panel, 
 
 'Импорт функций из собственного функцинала'
 from app.database.crud import set_role_db
-
+from app.bot.utils import save_order_to_db
+from app.bot.utils import format_order
+from app.bot.utils import create_order
+from app.bot.utils import temp_orders
 
 from app.bot.instance import bot
 
@@ -25,14 +28,6 @@ def set_role(message):
         bot.reply_to(message, "❌ Использование: /set_role [phone] [role]")
 
 'Обработчик команды /manager_panel вызывает панель команд доступных для роли manager'
-@bot.message_handler(commands=['manager_panel'])
-@role_required('manager', 'admin')
-def manager_panel(message):
-    markup = types.ReplyKeyboardMarkup()
-    free_drivers_button = types.KeyboardButton('Свободные водители')
-    markup.row(free_drivers_button)
-    bot.send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
-    bot.register_next_step_handler(message, on_click_manager_panel)
 
 @bot.message_handler(commands=['start'])
 def start_handler(message):
@@ -44,9 +39,43 @@ def start_handler(message):
 def manager_panel(message):
     markup = types.ReplyKeyboardMarkup()
     free_drivers_button = types.KeyboardButton('Свободные водители')
-    markup.row(free_drivers_button)
+    create_new_order = types.KeyboardButton('📝 Создать заказ')
+    markup.row(free_drivers_button, create_new_order)
     bot.send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
     bot.register_next_step_handler(message, lambda msg: on_click_manager_panel(msg, manager_panel))
+
+# Обработчик кнопок подтверждения
+@bot.callback_query_handler(func=lambda call: call.data.startswith(('confirm_order_', 'restart_order_')))
+def handle_order_confirmation(call):
+    chat_id = call.data.split('_')[-1]
+    order_data = temp_orders.get(int(chat_id))
+
+    if not order_data:
+        bot.answer_callback_query(call.id, "❌ Данные заказа утеряны. Начните заново.")
+        return
+
+    if call.data.startswith('confirm_order_'):
+        # Сохранение заказа в базе данных
+        order_id = save_order_to_db(order_data)
+
+        bot.send_message(
+            call.message.chat.id,
+            f"✅ *Заказ #{order_id} успешно создан!*\n\n{format_order(order_data)}",
+            parse_mode="Markdown",
+            reply_markup=types.ReplyKeyboardRemove()
+        )
+        # Удаляем временные данные
+        if int(chat_id) in temp_orders:
+            del temp_orders[int(chat_id)]
+        manager_panel(call.message)
+
+    else:  # restart_order
+        # Удаляем временные данные
+        if int(chat_id) in temp_orders:
+            del temp_orders[int(chat_id)]
+        create_order(call.message)
+
+    bot.answer_callback_query(call.id)
 
 @bot.message_handler(commands=['driver_panel'])
 @role_required('driver', 'admin')

@@ -15,12 +15,12 @@ supabase = create_client(url, key)
 
 
 # Проверка роли пользователя
-def check_user_role(telegram_id):
+'''def check_user_role(telegram_id):
     user = supabase.table('users').select('role').eq('telegram_id', telegram_id).execute()
-    return user.data[0]['role'] if user.data else None
+    return user.data[0]['role'] if user.data else None'''
 
 
-# Декоратор для проверки ролей
+'''# Декоратор для проверки ролей
 def role_required(*allowed_roles):
     def decorator(func):
         def wrapper(message: Message, *args, **kwargs):
@@ -32,11 +32,11 @@ def role_required(*allowed_roles):
 
         return wrapper
 
-    return decorator
+    return decorator'''
 
 
 # Обновленная функция регистрации
-def process_phone(message):
+'''def process_phone(message):
     phone = message.text
     if not phone.isdigit() or len(phone) != 11:
         bot.send_message(message.chat.id, '❌ Неверный формат! Попробуйте ещё раз.')
@@ -50,12 +50,12 @@ def process_phone(message):
             'telegram_name': message.from_user.username
         }, phone)
         role = check_user_role(message.chat.id)
-        '''bot.send_message(message.chat.id, f'✅ Вы успешно зарегистрированы! Роль: {role}')'''
-        user_verification(message)
+        bot.send_message(message.chat.id, f'✅ Вы успешно зарегистрированы! Роль: {role}')
+        user_verification(message)'''
 
 
 # Команда для изменения роли (только для админов)
-@bot.message_handler(commands=['set_role'])
+'''@bot.message_handler(commands=['set_role'])
 @role_required('admin')
 def set_role(message):
     try:
@@ -67,57 +67,54 @@ def set_role(message):
         supabase.table('users').update({'role': new_role}).eq('phone_number', phone).execute()
         bot.reply_to(message, f"✅ Роль обновлена! Пользователь {phone} теперь {new_role}")
     except:
-        bot.reply_to(message, "❌ Использование: /set_role [phone] [role]")
+        bot.reply_to(message, "❌ Использование: /set_role [phone] [role]")'''
 
-def on_click_driver_panel(message):
+'''def on_click_driver_panel(message):
     if message.text == 'Взять заказ':
-        driver_take_order(message)
+        driver_next_status(message, 1, 'Заказ успешно взят в работу! \nНаправляйтесь к клиенту')
     elif message.text == 'Начать смену':
         start_driver_shift(message)
     elif message.text == 'Завершить смену':
         finish_driver_shift(message)
     elif message.text == 'Перейти к этапу загрузки автомобиля':
-        driver_loading_cat_state(message)
+        driver_next_status(message, 2, 'Вы находитесь на месте загрузки автомобиля. \nПосле загрузки смените ваш статус на "Выдвинуться на точку разгрузки"')
     elif message.text == 'Выдвинуться на точку разгрузки':
-        driver_way_unloading(message)
+        driver_next_status(message, 3, 'Вы находитесь на месте загрузки автомобиля. \nПосле загрузки смените ваш статус на "Выдвинуться на точку разгрузки"')
     elif message.text == 'Разгрузка автомобиля':
-        driver_unloading_car(message)
+        driver_next_status(message, 4, 'Вы находитесь на месте разгрузки автомобилья. \nПосле прибытия смените ваш статус на "Завершить заказ"')
     elif message.text == 'Завершить заказ':
-        driver_complete_order(message)
+        driver_next_status(message, 5, 'Вы успешно завершили заказ. \nОжидайте поступления нового заказа')
 
     driver_panel(message)
 
+def driver_next_status(message, next_status_id, message_to_user):
+    supabase.table('users').update('state_id', next_status_id).eq('telegram_id', message.from_user.id).execute()
+    bot.reply_to(message, message_to_user)'''
 
-
-'''supabase.table('users').update({'state_id': 2}).eq('telegram_id', message.from_user.id).execute()'''
-
-def driver_complete_order(message):
+'''def driver_complete_order(message):
     supabase.table('users').update({'state_id': 5}).eq('telegram_id', message.from_user.id).execute()
-    bot.reply_to(message,'Вы успешно завершили заказ. \nОжидайте поступления нового заказа')
+    bot.reply_to(message,'Вы успешно завершили заказ. \nОжидайте поступления нового заказа')'''
 
-def driver_unloading_car(message):
+'''def driver_unloading_car(message):
     supabase.table('users').update({'state_id': 4}).eq('telegram_id', message.from_user.id).execute()
-    bot.reply_to(message,'Вы находитесь на месте разгрузки автомобилья. \nПосле прибытия смените ваш статус на "Завершить заказ"')
-
-def driver_way_unloading(message):
+    bot.reply_to(message,'Вы находитесь на месте разгрузки автомобилья. \nПосле прибытия смените ваш статус на "Завершить заказ"')'''
+'''def driver_way_unloading(message):
     supabase.table('users').update({'state_id': 3}).eq('telegram_id', message.from_user.id).execute()
-    bot.reply_to(message,'Вы выдвинулись на точку разгрузки. \nПосле прибытия смените ваш статус на "Разгрузка автомобиля"')
-
-def driver_loading_cat_state(message):
+    bot.reply_to(message,'Вы выдвинулись на точку разгрузки. \nПосле прибытия смените ваш статус на "Разгрузка автомобиля"')'''
+'''def driver_loading_cat_state(message):
     supabase.table('users').update({'state_id': 2}).eq('telegram_id', message.from_user.id).execute()
-    bot.reply_to(message, 'Вы находитесь на месте загрузки автомобиля. \nПосле загрузки смените ваш статус на "Выдвинуться на точку разгрузки"')
-
-def driver_take_order(message):
+    bot.reply_to(message, 'Вы находитесь на месте загрузки автомобиля. \nПосле загрузки смените ваш статус на "Выдвинуться на точку разгрузки"')'''
+'''def driver_take_order(message):
     supabase.table('users').update({'state_id': 1}).eq('telegram_id', message.from_user.id).execute()
-    bot.send_message(message.chat.id, 'Заказ успешно взят в работу! \n Направляйтесь к клиенту')
+    bot.send_message(message.chat.id, 'Заказ успешно взят в работу! \n Направляйтесь к клиенту')'''
 
-def convert_to_string(array):
+'''def convert_to_string(array):
     i = 0
     list = ''
     for i in range(array.len):
-        list += 'f{}'
+        list += 'f{}' '''
 
-def on_click_manager_panel(message):
+'''def on_click_manager_panel(message):
     if message.text == 'Свободные водители':
         free_drivers = supabase.table('users') \
             .select('last_name', 'first_name', 'surname', 'phone_number') \
@@ -146,20 +143,20 @@ def on_click_manager_panel(message):
         # Отправляем сообщение
         bot.reply_to(message, response)
     else: bot.reply_to(message, '❌ Неверная команда')
-    manager_panel(message)
+    manager_panel(message)'''
 
-@bot.message_handler(commands=['manager_panel'])
+'''@bot.message_handler(commands=['manager_panel'])
 @role_required('manager', 'admin')
 def manager_panel(message):
     markup = types.ReplyKeyboardMarkup()
     free_drivers_button = types.KeyboardButton('Свободные водители')
     markup.row(free_drivers_button)
     bot.send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
-    bot.register_next_step_handler(message, on_click_manager_panel)
+    bot.register_next_step_handler(message, on_click_manager_panel)'''
 
 
-@bot.message_handler(commands=['driver_panel', 'admin'])
-@role_required('driver')
+'''@bot.message_handler(commands=['driver_panel'])
+@role_required('driver', 'admin')
 def driver_panel(message):
     markup = types.ReplyKeyboardMarkup()
     is_on_shift = supabase.table('users').select('is_on_shift').eq('telegram_id', message.from_user.id).execute()
@@ -187,36 +184,36 @@ def driver_panel(message):
         markup.row(driver_take_order_button)
 
     bot.send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
-    bot.register_next_step_handler(message, on_click_driver_panel)
+    bot.register_next_step_handler(message, on_click_driver_panel)'''
 
 
-def start_driver_shift(message):
+'''def start_driver_shift(message):
     tg_id = message.from_user.id
     supabase.table('users').update({'is_on_shift': True}).eq('telegram_id', tg_id).execute()
-    bot.send_message(message.chat.id, 'Вы на смене!')
+    bot.send_message(message.chat.id, 'Вы на смене!')'''
 
-def finish_driver_shift(message):
+'''def finish_driver_shift(message):
     tg_id = message.from_user.id
     supabase.table('users').update({'is_on_shift': False}).eq('telegram_id', tg_id).execute()
-    bot.send_message(message.chat.id, 'Смена завершена!')
+    bot.send_message(message.chat.id, 'Смена завершена!')'''
 
 # Остальные ваши функции без изменений
-def update_data_tg_id(table, data, phone):
+'''def update_data_tg_id(table, data, phone):
     supabase.table(table).update(data).eq('phone_number', phone).execute()
 
 
 def search_number(phone):
     response = supabase.table('users').select('phone_number', count='exact').eq('phone_number', phone).execute()
-    return response.count
+    return response.count'''
 
 
-def registration(message):
+'''def registration(message):
     msg = bot.send_message(message.chat.id,
                            'Введите номер телефона в формате 89991112233 (без пробелов и спецсимволов):')
-    bot.register_next_step_handler(msg, process_phone)
+    bot.register_next_step_handler(msg, process_phone)'''
 
 
-@bot.message_handler(commands=['start'])
+'''@bot.message_handler(commands=['start'])
 def user_verification(message):
     response = supabase.table('users').select('telegram_id', count='exact').eq('telegram_id', message.chat.id).execute()
     if response.count != 0:
@@ -224,13 +221,21 @@ def user_verification(message):
         bot.send_message(message.chat.id, f'✅ Вы авторизованы! Ваша роль: {role}')
         role_commands(message, role)
     else:
-        registration(message)
+        registration(message)'''
 
-def role_commands(message, role):
+'''def role_commands(message, role):
     if role == 'driver':
         driver_panel(message)
     elif role == 'manager':
-        manager_panel(message)
+        manager_panel(message)'''
 
-print('Бот запущен')
-bot.polling(none_stop=True)
+from app.bot.instance import bot
+from app.bot.handlers import start_handler, driver_panel, manager_panel
+
+if __name__ == "__main__":
+    print('бот запущен')
+    bot.polling(none_stop=True)
+
+
+'''print('Бот запущен')
+bot.polling(none_stop=True)'''
