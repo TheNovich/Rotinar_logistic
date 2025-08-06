@@ -53,7 +53,7 @@ def process_phone(message, driver_panel, manager_panel):
 
 
 def on_click_driver_panel(message, driver_panel):
-    if message.text == 'Взять заказ':
+    if message.text == 'Еду на загрузку':
         driver_next_status(message, 1, 'Заказ успешно взят в работу! \nНаправляйтесь к клиенту')
     elif message.text == 'Начать смену':
         start_driver_shift(message)
@@ -71,6 +71,7 @@ def on_click_driver_panel(message, driver_panel):
     driver_panel(message)
 
 def driver_next_status(message, next_status_id, message_to_user):
+    print(123)
     switch_driver_status(next_status_id, message.from_user.id)
     bot.reply_to(message, message_to_user)
 
@@ -98,8 +99,9 @@ def role_commands(message, role, driver_panel, manager_panel):
 def on_click_manager_panel(message, manager_panel):
     if message.text == 'Свободные водители':
         free_drivers = supabase.table('users') \
-            .select('last_name', 'first_name', 'surname', 'phone_number') \
-            .or_('and(role.eq.driver, state_id.eq.5)') \
+            .select('last_name', 'first_name', 'surname', 'phone_number', 'state_id') \
+            .eq('role', 'driver') \
+            .eq('state_id', 5) \
             .execute()
 
         # Форматируем данные водителей
@@ -110,6 +112,7 @@ def on_click_manager_panel(message, manager_panel):
                 f"Имя: {driver['first_name']}\n"
                 f"Отчество: {driver['surname']}\n"
                 f"Телефон: {driver['phone_number']}\n"
+                f"Статус: Свободен\n"
                 "-------------------------"
             )
             drivers_list.append(driver_info)
@@ -123,6 +126,46 @@ def on_click_manager_panel(message, manager_panel):
         # Отправляем сообщение
         bot.reply_to(message, response)
         manager_panel(message)  # Показываем панель снова после выполнения
+
+    elif message.text == 'Все водители':  # Новый обработчик
+        all_drivers = supabase.table('users') \
+            .select('last_name', 'first_name', 'surname', 'phone_number', 'state_id') \
+            .eq('role', 'driver') \
+            .in_('state_id', [1, 2, 3, 4, 5]) \
+            .execute()
+
+        # Словарь для преобразования state_id в текстовый статус
+        status_names = {
+            1: "Выдвинулся на адрес загрузки",
+            2: "Загрузка автомобиля",
+            3: "Выдвинулся на адрес разгрузки",
+            4: "Выгрузка автомобиля",
+            5: "Свободен"
+        }
+
+        # Форматируем данные водителей
+        drivers_list = []
+        for driver in all_drivers.data:
+            status = status_names.get(driver['state_id'], "Неизвестный статус")
+            driver_info = (
+                f"Фамилия: {driver['last_name']}\n"
+                f"Имя: {driver['first_name']}\n"
+                f"Отчество: {driver['surname']}\n"
+                f"Телефон: {driver['phone_number']}\n"
+                f"Статус: {status}\n"
+                "-------------------------"
+            )
+            drivers_list.append(driver_info)
+
+        # Объединяем всех водителей в одно сообщение
+        if drivers_list:
+            response = "Все водители:\n\n" + "\n".join(drivers_list)
+        else:
+            response = "Водителей не найдено"
+
+        # Отправляем сообщение
+        bot.reply_to(message, response)
+        manager_panel(message)
 
     elif message.text == '📝 Создать заказ':
         # Запускаем процесс создания заказа

@@ -42,6 +42,7 @@ def manager_panel(message):
     markup = types.ReplyKeyboardMarkup()
     buttons = []
     buttons.append(types.KeyboardButton('Свободные водители'))
+    buttons.append(types.KeyboardButton('Все водители'))
     if config.USE_NEW_ORDER_FLOW:
         buttons.append(types.KeyboardButton('📝 Создать заказ'))
     markup.row(*buttons)
