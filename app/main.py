@@ -229,13 +229,50 @@ def user_verification(message):
     elif role == 'manager':
         manager_panel(message)'''
 
+import time
+import logging
+from requests.exceptions import ConnectionError as RequestsConnectionError
+
 from app.bot.instance import bot
 from app.bot.handlers import start_handler, driver_panel, manager_panel
 
-if __name__ == "__main__":
-    print('бот запущен')
-    bot.polling(none_stop=True)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('bot_errors.log'),
+        logging.StreamHandler()
+    ]
+)
 
 
-'''print('Бот запущен')
-bot.polling(none_stop=True)'''
+def robust_polling():
+    """Устойчивый запуск бота с обработкой сетевых ошибок"""
+    restart_delay = 5  # Начальная задержка перезапуска
+
+    while True:
+        try:
+            logging.info("Starting bot polling...")
+            bot.polling(
+                none_stop=True,
+                interval=2,
+                timeout=60,
+                long_polling_timeout=30
+            )
+        except RequestsConnectionError as e:
+            logging.error(f"Network error: {e}")
+            logging.info(f"Restarting in {restart_delay} seconds...")
+            time.sleep(restart_delay)
+
+            # Экспоненциальное увеличение задержки
+            restart_delay = min(restart_delay * 2, 60)  # Макс. 60 секунд
+
+        except Exception as e:
+            logging.exception(f"Critical error: {e}")
+            logging.info("Restarting in 10 seconds...")
+            time.sleep(10)
+            restart_delay = 5  # Сброс задержки
+
+
+if __name__ == '__main__':
+    robust_polling()

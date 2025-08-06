@@ -4,6 +4,7 @@ from telebot import types
 from telebot.handler_backends import State, StatesGroup
 from app.bot.order_creation import create_order
 
+
 'from handlers import manager_panel'
 
 'Импорт функций взаимодействия с ДБ'
@@ -11,6 +12,45 @@ from app.database.crud import check_user_role, search_number, update_data_tg_id,
 'from app.bot.handlers import driver_panel, manager_panel'
 
 from app.bot.instance import bot
+
+
+def safe_send_message(chat_id, text, max_retries=3, retry_delay=2, **kwargs):
+    """
+    Безопасная отправка сообщения с обработкой ошибок и повторными попытками
+    Поддерживает ВСЕ аргументы оригинального send_message:
+    - reply_markup
+    - parse_mode
+    - disable_web_page_preview
+    - reply_to_message_id
+    - и любые другие параметры
+
+    Параметры:
+        chat_id: ID чата
+        text: Текст сообщения
+        max_retries: Максимальное количество попыток
+        retry_delay: Базовая задержка между попытками (сек)
+        **kwargs: Любые дополнительные параметры для send_message
+    """
+    for attempt in range(max_retries):
+        try:
+            return safe_send_message(chat_id, text, **kwargs)
+
+        except (ConnectionResetError, ApiException) as e:
+            # Логируем ошибку
+            print(f"Ошибка отправки (попытка {attempt + 1}/{max_retries}): {type(e).__name__} - {e}")
+
+            # Экспоненциальная backoff-задержка
+            delay = retry_delay * (2 ** attempt)
+            time.sleep(delay)
+
+        except Exception as e:
+            # Обработка непредвиденных ошибок
+            print(f"Критическая ошибка при отправке: {type(e).__name__} - {e}")
+            raise  # Пробрасываем выше для обработки в основном коде
+
+    # Если все попытки исчерпаны
+    print(f"⚠️ Не удалось отправить сообщение после {max_retries} попыток")
+    return None
 
 # Функция сохранения заказа (заглушка)
 def save_order_to_db(order_data):
@@ -25,7 +65,7 @@ def role_required(*allowed_roles):
         def wrapper(message: Message, *args, **kwargs):
             user_role = check_user_role(message.from_user.id)
             if user_role not in allowed_roles:
-                bot.reply_to(message, "⚠️ У вас недостаточно прав!")
+                safe_send_message(message, "⚠️ У вас недостаточно прав!")
                 return
             return func(message, *args, **kwargs)
 
@@ -37,18 +77,16 @@ def role_required(*allowed_roles):
 def process_phone(message, driver_panel, manager_panel):
     phone = message.text
     if not phone.isdigit() or len(phone) != 11:
-        bot.send_message(message.chat.id, '❌ Неверный формат! Попробуйте ещё раз.')
+        safe_send_message(message.chat.id, '❌ Неверный формат! Попробуйте ещё раз.')
         registration(message, driver_panel, manager_panel)
     elif search_number(phone) == 0:
-        bot.send_message(message.chat.id, '❌ Номер не найден в системе!')
+        safe_send_message(message.chat.id, '❌ Номер не найден в системе!')
         registration(message, driver_panel, manager_panel)
     else:
         update_data_tg_id('users', {
             'telegram_id': message.from_user.id,
             'telegram_name': message.from_user.username
         }, phone)
-        role = check_user_role(message.chat.id)
-        '''bot.send_message(message.chat.id, f'✅ Вы успешно зарегистрированы! Роль: {role}')'''
         user_verification(message, driver_panel, manager_panel)
 
 
@@ -71,22 +109,22 @@ def on_click_driver_panel(message, driver_panel):
     driver_panel(message)
 
 def driver_next_status(message, next_status_id, message_to_user):
-    print(123)
+
     switch_driver_status(next_status_id, message.from_user.id)
-    bot.reply_to(message, message_to_user)
+    safe_send_message(message, message_to_user)
 
 def start_driver_shift(message):
     tg_id = message.from_user.id
     switch_driver_shift(True, tg_id)
-    bot.send_message(message.chat.id, 'Вы на смене!')
+    safe_send_message(message.chat.id, 'Вы на смене!')
 
 def finish_driver_shift(message):
     tg_id = message.from_user.id
     switch_driver_shift(False, tg_id)
-    bot.send_message(message.chat.id, 'Смена завершена!')
+    safe_send_message(message.chat.id, 'Смена завершена!')
 
 def registration(message, driver_panel, manager_panel):
-    msg = bot.send_message(message.chat.id,
+    msg = safe_send_message(message.chat.id,
                            'Введите номер телефона в формате 89991112233 (без пробелов и спецсимволов):')
     bot.register_next_step_handler(msg, lambda msg: process_phone(msg, driver_panel, manager_panel))
 
@@ -125,7 +163,7 @@ def on_click_manager_panel(message, manager_panel):
             response = "Свободных водителей нет"
 
         # Отправляем сообщение
-        bot.reply_to(message, response)
+        safe_send_message(message, response)
         manager_panel(message)  # Показываем панель снова после выполнения
 
     elif message.text == 'Все водители':  # Новый обработчик
@@ -166,7 +204,7 @@ def on_click_manager_panel(message, manager_panel):
             response = "Водителей не найдено"
 
         # Отправляем сообщение
-        bot.reply_to(message, response)
+        safe_send_message(message, response)
         manager_panel(message)
 
     elif message.text == '📝 Создать заказ':
@@ -175,14 +213,14 @@ def on_click_manager_panel(message, manager_panel):
         # Не вызываем manager_panel здесь - FSM будет управлять диалогом
 
     else:
-        bot.reply_to(message, '❌ Неверная команда')
+        safe_send_message(message, '❌ Неверная команда')
         manager_panel(message)  # Показываем панель снова при ошибке
 
 def user_verification(message, driver_panel, manager_panel):
     response = supabase.table('users').select('telegram_id', count='exact').eq('telegram_id', message.chat.id).execute()
     if response.count != 0:
         role = check_user_role(message.chat.id)
-        bot.send_message(message.chat.id, f'✅ Вы авторизованы! Ваша роль: {role}')
+        safe_send_message(message.chat.id, f'✅ Вы авторизованы! Ваша роль: {role}')
         role_commands(message, role, driver_panel, manager_panel)
     else:
         registration(message, driver_panel, manager_panel)

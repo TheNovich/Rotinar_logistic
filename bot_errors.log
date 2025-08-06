@@ -1,0 +1,205 @@
+2025-08-06 23:18:57,929 - INFO - Starting bot polling...
+2025-08-06 23:19:02,803 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=telegram_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:02,905 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:03,236 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:10,777 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&state_id=eq.5&is_on_shift=eq.True "HTTP/2 200 OK"
+2025-08-06 23:19:10,991 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:13,063 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&is_on_shift=eq.True&state_id=in.%281%2C2%2C3%2C4%2C5%29 "HTTP/2 200 OK"
+2025-08-06 23:19:13,404 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:52,962 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&state_id=eq.5&is_on_shift=eq.True "HTTP/2 200 OK"
+2025-08-06 23:19:53,393 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:54,879 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=telegram_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:54,915 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&is_on_shift=eq.True&state_id=in.%281%2C2%2C3%2C4%2C5%29 "HTTP/2 200 OK"
+2025-08-06 23:19:54,974 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:55,123 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:55,150 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:58,642 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&state_id=eq.5&is_on_shift=eq.True "HTTP/2 200 OK"
+2025-08-06 23:19:58,648 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&state_id=eq.5&is_on_shift=eq.True "HTTP/2 200 OK"
+2025-08-06 23:19:58,967 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:19:59,337 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:20:04,447 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:20:04,469 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:20:53,265 - INFO - Starting bot polling...
+2025-08-06 23:25:55,676 - INFO - Starting bot polling...
+2025-08-06 23:26:02,491 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=telegram_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:26:02,702 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:26:03,024 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:26:05,488 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&is_on_shift=eq.True&state_id=in.%281%2C2%2C3%2C4%2C5%29 "HTTP/2 200 OK"
+2025-08-06 23:26:05,887 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:28:11,719 - ERROR - Critical error: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=60)
+Traceback (most recent call last):
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\urllib3\connection.py", line 565, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\Ilia\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Ilia\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Ilia\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Ilia\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Ilia\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Ilia\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+        self, url, f"Read timed out. (read timeout={timeout_value})"
+    ) from err
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=60)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ilia\Desktop\Rotinar\app\main.py", line 256, in robust_polling
+    bot.polling(
+    ~~~~~~~~~~~^
+        none_stop=True,
+        ^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        long_polling_timeout=30
+        ^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\telebot\__init__.py", line 1198, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            logger_level=logger_level, allowed_updates=allowed_updates)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\telebot\__init__.py", line 1273, in __threaded_polling
+    raise e
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\telebot\__init__.py", line 1234, in __threaded_polling
+    polling_thread.raise_exceptions()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+    ~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\telebot\__init__.py", line 688, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+                               allowed_updates=allowed_updates,
+                               timeout=timeout, long_polling_timeout=long_polling_timeout)
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\telebot\__init__.py", line 660, in get_updates
+    json_updates = apihelper.get_updates(
+        self.token, offset=offset, limit=limit, timeout=timeout, allowed_updates=allowed_updates,
+        long_polling_timeout=long_polling_timeout)
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\telebot\apihelper.py", line 332, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\telebot\apihelper.py", line 162, in _make_request
+    result = _get_req_session().request(
+        method, request_url, params=params, files=files,
+        timeout=(connect_timeout, read_timeout), proxies=proxy)
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\Ilia\Desktop\Rotinar\.venv\Lib\site-packages\requests\adapters.py", line 713, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=60)
+2025-08-06 23:28:11,770 - INFO - Restarting in 10 seconds...
+2025-08-06 23:28:21,771 - INFO - Starting bot polling...
+2025-08-06 23:28:24,365 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&state_id=eq.5&is_on_shift=eq.True "HTTP/2 200 OK"
+2025-08-06 23:28:24,606 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:52:02,687 - INFO - Starting bot polling...
+2025-08-06 23:52:43,367 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:52:45,794 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=telegram_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:52:52,122 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=phone_number&phone_number=eq.89999999999 "HTTP/2 200 OK"
+2025-08-06 23:53:02,239 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=phone_number&phone_number=eq.89683606929 "HTTP/2 200 OK"
+2025-08-06 23:53:02,396 - INFO - HTTP Request: PATCH https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?phone_number=eq.89683606929 "HTTP/2 200 OK"
+2025-08-06 23:53:02,542 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:53:02,816 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=telegram_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:53:02,912 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:53:03,139 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:53:04,670 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&is_on_shift=eq.True&state_id=in.%281%2C2%2C3%2C4%2C5%29 "HTTP/2 200 OK"
+2025-08-06 23:53:04,846 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:53:08,355 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&state_id=eq.5&is_on_shift=eq.True "HTTP/2 200 OK"
+2025-08-06 23:53:08,618 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:53:18,460 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:53:20,374 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&is_on_shift=eq.True&state_id=in.%281%2C2%2C3%2C4%2C5%29 "HTTP/2 200 OK"
+2025-08-06 23:53:20,636 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:53:23,201 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:53:25,570 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&is_on_shift=eq.True&state_id=in.%281%2C2%2C3%2C4%2C5%29 "HTTP/2 200 OK"
+2025-08-06 23:53:25,792 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:53:55,263 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&is_on_shift=eq.True&state_id=in.%281%2C2%2C3%2C4%2C5%29 "HTTP/2 200 OK"
+2025-08-06 23:53:55,707 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:04,714 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=telegram_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:04,895 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:05,118 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:05,261 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:05,430 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:06,922 - INFO - HTTP Request: PATCH https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:07,199 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:07,657 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:07,741 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:09,744 - INFO - HTTP Request: PATCH https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:09,950 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:10,381 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:10,538 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:12,056 - INFO - HTTP Request: PATCH https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:12,281 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:12,372 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:12,483 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:17,141 - INFO - HTTP Request: PATCH https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:17,311 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:17,402 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:17,502 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:19,189 - INFO - HTTP Request: PATCH https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:19,348 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:19,426 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:19,507 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:21,460 - INFO - HTTP Request: PATCH https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:21,620 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:21,705 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:21,797 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:23,347 - INFO - HTTP Request: PATCH https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:23,513 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:23,640 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:23,739 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:25,360 - INFO - HTTP Request: PATCH https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:25,586 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:25,663 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:25,762 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:27,604 - INFO - HTTP Request: PATCH https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:27,787 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:27,861 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:54:27,990 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-06 23:55:49,984 - INFO - Starting bot polling...
+2025-08-06 23:55:55,192 - INFO - Starting bot polling...

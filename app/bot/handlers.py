@@ -11,6 +11,7 @@ from app.bot.utils import create_order
 from app.bot.utils import temp_orders'''
 from app.bot.order_creation import create_order, temp_orders, format_order
 from config import config
+from app.bot.utils import safe_send_message
 
 from app.bot.instance import bot
 
@@ -22,12 +23,12 @@ def set_role(message):
     try:
         _, phone, new_role = message.text.split()
         if search_number(phone) == 0:
-            bot.reply_to(message, "❌ Пользователь с таким номером не найден!")
+            safe_send_message(message, "❌ Пользователь с таким номером не найден!")
             return
         set_role_db(new_role, phone)
-        bot.reply_to(message, f"✅ Роль обновлена! Пользователь {phone} теперь {new_role}")
+        safe_send_message(message, f"✅ Роль обновлена! Пользователь {phone} теперь {new_role}")
     except:
-        bot.reply_to(message, "❌ Использование: /set_role [phone] [role]")
+        safe_send_message(message, "❌ Использование: /set_role [phone] [role]")
 
 'Обработчик команды /manager_panel вызывает панель команд доступных для роли manager'
 
@@ -46,7 +47,7 @@ def manager_panel(message):
     if config.USE_NEW_ORDER_FLOW:
         buttons.append(types.KeyboardButton('📝 Создать заказ'))
     markup.row(*buttons)
-    bot.send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
+    safe_send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
     bot.register_next_step_handler(message, lambda msg: on_click_manager_panel(msg, manager_panel))
 
 # Обработчик кнопок подтверждения
@@ -63,7 +64,7 @@ def handle_order_confirmation(call):
         # Сохранение заказа в базе данных
         order_id = save_order_to_db(order_data)
 
-        bot.send_message(
+        safe_send_message(
             call.message.chat.id,
             f"✅ *Заказ #{order_id} успешно создан!*\n\n{format_order(order_data)}",
             parse_mode="Markdown",
@@ -110,5 +111,5 @@ def driver_panel(message):
         driver_take_order_button = types.KeyboardButton('Еду на загрузку')
         markup.row(driver_take_order_button)
 
-    bot.send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
+    safe_send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
     bot.register_next_step_handler(message, lambda msg: on_click_driver_panel(msg, driver_panel))
