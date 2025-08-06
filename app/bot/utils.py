@@ -102,6 +102,7 @@ def on_click_manager_panel(message, manager_panel):
             .select('last_name', 'first_name', 'surname', 'phone_number', 'state_id') \
             .eq('role', 'driver') \
             .eq('state_id', 5) \
+            .eq('is_on_shift', True) \
             .execute()
 
         # Форматируем данные водителей
@@ -131,6 +132,7 @@ def on_click_manager_panel(message, manager_panel):
         all_drivers = supabase.table('users') \
             .select('last_name', 'first_name', 'surname', 'phone_number', 'state_id') \
             .eq('role', 'driver') \
+            .eq('is_on_shift', True)  \
             .in_('state_id', [1, 2, 3, 4, 5]) \
             .execute()
 
