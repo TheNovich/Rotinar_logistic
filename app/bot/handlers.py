@@ -23,12 +23,12 @@ def set_role(message):
     try:
         _, phone, new_role = message.text.split()
         if search_number(phone) == 0:
-            safe_send_message(message, "❌ Пользователь с таким номером не найден!")
+            safe_send_message(message.chat.id, "❌ Пользователь с таким номером не найден!")
             return
         set_role_db(new_role, phone)
-        safe_send_message(message, f"✅ Роль обновлена! Пользователь {phone} теперь {new_role}")
+        safe_send_message(message.chat.id, f"✅ Роль обновлена! Пользователь {phone} теперь {new_role}")
     except:
-        safe_send_message(message, "❌ Использование: /set_role [phone] [role]")
+        safe_send_message(message.chat.id, "❌ Использование: /set_role [phone] [role]")
 
 'Обработчик команды /manager_panel вызывает панель команд доступных для роли manager'
 

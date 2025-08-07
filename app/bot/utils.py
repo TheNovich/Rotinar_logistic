@@ -1,3 +1,7 @@
+import time
+from requests.exceptions import ConnectionError, ReadTimeout
+from telebot.apihelper import ApiException
+
 'импорт библиотеки pyTelegramBotApi'
 from telebot.types import Message
 from telebot import types
@@ -33,7 +37,7 @@ def safe_send_message(chat_id, text, max_retries=3, retry_delay=2, **kwargs):
     """
     for attempt in range(max_retries):
         try:
-            return safe_send_message(chat_id, text, **kwargs)
+            return bot.send_message(chat_id, text, **kwargs)
 
         except (ConnectionResetError, ApiException) as e:
             # Логируем ошибку
@@ -65,7 +69,7 @@ def role_required(*allowed_roles):
         def wrapper(message: Message, *args, **kwargs):
             user_role = check_user_role(message.from_user.id)
             if user_role not in allowed_roles:
-                safe_send_message(message, "⚠️ У вас недостаточно прав!")
+                safe_send_message(message.chat.id, "⚠️ У вас недостаточно прав!")
                 return
             return func(message, *args, **kwargs)
 
@@ -100,7 +104,7 @@ def on_click_driver_panel(message, driver_panel):
     elif message.text == 'Перейти к этапу загрузки автомобиля':
         driver_next_status(message, 2, 'Вы находитесь на месте загрузки автомобиля. \nПосле загрузки смените ваш статус на "Выдвинуться на точку разгрузки"')
     elif message.text == 'Выдвинуться на точку разгрузки':
-        driver_next_status(message, 3, 'Вы находитесь на месте загрузки автомобиля. \nПосле загрузки смените ваш статус на "Выдвинуться на точку разгрузки"')
+        driver_next_status(message, 3, 'Вы находитесь на пути в точку разгрузки автомобиля. \nПосле прибытия смените ваш статус на "Разгрузка автомобиля"')
     elif message.text == 'Разгрузка автомобиля':
         driver_next_status(message, 4, 'Вы находитесь на месте разгрузки автомобилья. \nПосле прибытия смените ваш статус на "Завершить заказ"')
     elif message.text == 'Завершить заказ':
@@ -111,7 +115,7 @@ def on_click_driver_panel(message, driver_panel):
 def driver_next_status(message, next_status_id, message_to_user):
 
     switch_driver_status(next_status_id, message.from_user.id)
-    safe_send_message(message, message_to_user)
+    safe_send_message(message.chat.id, message_to_user)
 
 def start_driver_shift(message):
     tg_id = message.from_user.id
@@ -163,7 +167,7 @@ def on_click_manager_panel(message, manager_panel):
             response = "Свободных водителей нет"
 
         # Отправляем сообщение
-        safe_send_message(message, response)
+        safe_send_message(message.chat.id, response)
         manager_panel(message)  # Показываем панель снова после выполнения
 
     elif message.text == 'Все водители':  # Новый обработчик
@@ -204,7 +208,7 @@ def on_click_manager_panel(message, manager_panel):
             response = "Водителей не найдено"
 
         # Отправляем сообщение
-        safe_send_message(message, response)
+        safe_send_message(message.chat.id, response)
         manager_panel(message)
 
     elif message.text == '📝 Создать заказ':
@@ -213,7 +217,7 @@ def on_click_manager_panel(message, manager_panel):
         # Не вызываем manager_panel здесь - FSM будет управлять диалогом
 
     else:
-        safe_send_message(message, '❌ Неверная команда')
+        safe_send_message(message.chat.id, '❌ Неверная команда')
         manager_panel(message)  # Показываем панель снова при ошибке
 
 def user_verification(message, driver_panel, manager_panel):

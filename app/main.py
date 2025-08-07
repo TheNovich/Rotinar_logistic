@@ -236,6 +236,7 @@ from requests.exceptions import ConnectionError as RequestsConnectionError
 from app.bot.instance import bot
 from app.bot.handlers import start_handler, driver_panel, manager_panel
 
+# Настройка логирования
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -275,4 +276,7 @@ def robust_polling():
 
 
 if __name__ == '__main__':
+    # Ваша инициализация бота и обработчиков
+
+    # Запускаем устойчивый polling
     robust_polling()
