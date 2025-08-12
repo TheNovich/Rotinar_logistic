@@ -95,12 +95,12 @@ def process_phone(message, driver_panel, manager_panel):
 
 
 def on_click_driver_panel(message, driver_panel):
-    if message.text == 'Еду на загрузку':
-        driver_next_status(message, 1, 'Заказ успешно взят в работу! \nНаправляйтесь к клиенту')
-    elif message.text == 'Начать смену':
+    if message.text == 'Начать смену 🚀':
         start_driver_shift(message)
-    elif message.text == 'Завершить смену':
+    elif message.text == 'Завершить смену 🏁':
         finish_driver_shift(message)
+    elif message.text == 'Взять заказ':
+        driver_next_status(message, 1, 'Заказ успешно взят в работу! \nНаправляйтесь к клиенту')
     elif message.text == 'Перейти к этапу загрузки автомобиля':
         driver_next_status(message, 2, 'Вы находитесь на месте загрузки автомобиля. \nПосле загрузки смените ваш статус на "Выдвинуться на точку разгрузки"')
     elif message.text == 'Выдвинуться на точку разгрузки':
@@ -109,23 +109,27 @@ def on_click_driver_panel(message, driver_panel):
         driver_next_status(message, 4, 'Вы находитесь на месте разгрузки автомобилья. \nПосле прибытия смените ваш статус на "Завершить заказ"')
     elif message.text == 'Завершить заказ':
         driver_next_status(message, 5, 'Вы успешно завершили заказ. \nОжидайте поступления нового заказа')
+    elif message.text == 'Отменить заказ ❌':
+        driver_next_status(message,5, 'Заказ отменён, ваш статус "Свободен"')
+
 
     driver_panel(message)
 
 def driver_next_status(message, next_status_id, message_to_user):
-
     switch_driver_status(next_status_id, message.from_user.id)
     safe_send_message(message.chat.id, message_to_user)
 
 def start_driver_shift(message):
     tg_id = message.from_user.id
     switch_driver_shift(True, tg_id)
+    switch_driver_status(5, tg_id)
     safe_send_message(message.chat.id, 'Вы на смене!')
 
 def finish_driver_shift(message):
     tg_id = message.from_user.id
     switch_driver_shift(False, tg_id)
-    safe_send_message(message.chat.id, 'Смена завершена!')
+    switch_driver_status(5, tg_id)
+    safe_send_message(tg_id, 'Смена завершена!')
 
 def registration(message, driver_panel, manager_panel):
     msg = safe_send_message(message.chat.id,
@@ -138,7 +142,14 @@ def role_commands(message, role, driver_panel, manager_panel):
     elif role == 'manager':
         manager_panel(message)
 
+
 def on_click_manager_panel(message, manager_panel):
+    def convert_to_international(phone):
+        """Преобразует российский номер 8... в международный формат +7..."""
+        if phone.startswith('8') and len(phone) == 11:
+            return '+7' + phone[1:]
+        return phone
+
     if message.text == 'Свободные водители':
         free_drivers = supabase.table('users') \
             .select('last_name', 'first_name', 'surname', 'phone_number', 'state_id') \
@@ -147,78 +158,77 @@ def on_click_manager_panel(message, manager_panel):
             .eq('is_on_shift', True) \
             .execute()
 
-        # Форматируем данные водителей
         drivers_list = []
         for driver in free_drivers.data:
+            # Конвертируем номер в международный формат
+            international_phone = convert_to_international(driver['phone_number'])
+            phone_link = f"<a href='tel:{international_phone}'>{international_phone}</a>"
+
             driver_info = (
-                f"Фамилия: {driver['last_name']}\n"
-                f"Имя: {driver['first_name']}\n"
-                f"Отчество: {driver['surname']}\n"
-                f"Телефон: {driver['phone_number']}\n"
-                f"Статус: Свободен\n"
+                f"{driver['last_name']} "
+                f"{driver['first_name']} "
+                f"{driver['surname']}\n"
+                f"{phone_link}\n"
+                f"Свободен✅\n"
                 "-------------------------"
             )
             drivers_list.append(driver_info)
 
-        # Объединяем всех водителей в одно сообщение
         if drivers_list:
             response = "Свободные водители:\n\n" + "\n".join(drivers_list)
         else:
             response = "Свободных водителей нет"
 
-        # Отправляем сообщение
-        safe_send_message(message.chat.id, response)
-        manager_panel(message)  # Показываем панель снова после выполнения
+        safe_send_message(message.chat.id, response, parse_mode='HTML')
+        manager_panel(message)
 
-    elif message.text == 'Все водители':  # Новый обработчик
+    elif message.text == 'Все водители':
         all_drivers = supabase.table('users') \
             .select('last_name', 'first_name', 'surname', 'phone_number', 'state_id') \
             .eq('role', 'driver') \
-            .eq('is_on_shift', True)  \
+            .eq('is_on_shift', True) \
             .in_('state_id', [1, 2, 3, 4, 5]) \
             .execute()
 
-        # Словарь для преобразования state_id в текстовый статус
         status_names = {
-            1: "🔄Выдвинулся на адрес загрузки",
-            2: "🔄Загрузка автомобиля",
-            3: "🔄Выдвинулся на адрес разгрузки",
-            4: "🔄Выгрузка автомобиля",
-            5: "✅Свободен"
+            1: "Выдвинулся на погрузку 🚘",
+            2: "Погрузка автомобиля 🪝",
+            3: "Едет на выгрузку 🚨",
+            4: "Выгрузка автомобиля 🔄",
+            5: "Свободен ✅"
         }
 
-        # Форматируем данные водителей
         drivers_list = []
         for driver in all_drivers.data:
+            # Конвертируем номер в международный формат
+            international_phone = convert_to_international(driver['phone_number'])
+            phone_link = f"<a href='tel:{international_phone}'>{international_phone}</a>"
             status = status_names.get(driver['state_id'], "Неизвестный статус")
+
             driver_info = (
-                f"Фамилия: {driver['last_name']}\n"
-                f"Имя: {driver['first_name']}\n"
-                f"Отчество: {driver['surname']}\n"
-                f"Телефон: {driver['phone_number']}\n"
-                f"Статус: {status}\n"
+                f"{driver['last_name']} "
+                f"{driver['first_name']} "
+                f"{driver['surname']}\n"
+                f"{phone_link}\n"
+                f"{status}\n"
                 "-------------------------"
             )
             drivers_list.append(driver_info)
 
-        # Объединяем всех водителей в одно сообщение
         if drivers_list:
             response = "Все водители:\n\n" + "\n".join(drivers_list)
         else:
             response = "Водителей не найдено"
 
-        # Отправляем сообщение
-        safe_send_message(message.chat.id, response)
+        safe_send_message(message.chat.id, response, parse_mode='HTML')
         manager_panel(message)
 
     elif message.text == '📝 Создать заказ':
-        # Запускаем процесс создания заказа
         create_order(message, manager_panel)
-        # Не вызываем manager_panel здесь - FSM будет управлять диалогом
 
     else:
         safe_send_message(message.chat.id, '❌ Неверная команда')
-        manager_panel(message)  # Показываем панель снова при ошибке
+        manager_panel(message)
 
 def user_verification(message, driver_panel, manager_panel):
     response = supabase.table('users').select('telegram_id', count='exact').eq('telegram_id', message.chat.id).execute()
@@ -228,3 +238,9 @@ def user_verification(message, driver_panel, manager_panel):
         role_commands(message, role, driver_panel, manager_panel)
     else:
         registration(message, driver_panel, manager_panel)
+
+def convert_to_international(phone):
+    """Преобразует российский номер 8... в международный формат +7..."""
+    if phone.startswith('8') and len(phone) == 11:
+        return '+7' + phone[1:]
+    return phone  # Если уже в международном формате или другой стране

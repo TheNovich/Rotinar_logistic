@@ -47,7 +47,7 @@ def manager_panel(message):
     if config.USE_NEW_ORDER_FLOW:
         buttons.append(types.KeyboardButton('📝 Создать заказ'))
     markup.row(*buttons)
-    safe_send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
+    safe_send_message(message.chat.id, 'Выберите действие: ', reply_markup=markup)
     bot.register_next_step_handler(message, lambda msg: on_click_manager_panel(msg, manager_panel))
 
 # Обработчик кнопок подтверждения
@@ -89,27 +89,36 @@ def driver_panel(message):
     markup = types.ReplyKeyboardMarkup()
     is_on_shift = supabase.table('users').select('is_on_shift').eq('telegram_id', message.from_user.id).execute()
     driver_state = supabase.table('users').select('state_id').eq('telegram_id', message.from_user.id).execute()
-    if is_on_shift.data[0]['is_on_shift'] == True:
-        driver_finish_button = types.KeyboardButton('Завершить смену')
-        markup.row(driver_finish_button)
-    else:
-        driver_start_button = types.KeyboardButton('Начать смену')
+    if is_on_shift.data[0]['is_on_shift'] == False:
+        driver_start_button = types.KeyboardButton('Начать смену 🚀')
         markup.row(driver_start_button)
-    if driver_state.data[0]['state_id'] == 1:
-        driver_loading_car_button = types.KeyboardButton('Перейти к этапу загрузки автомобиля')
-        markup.row(driver_loading_car_button)
-    elif driver_state.data[0]['state_id'] == 2:
-        driver_loading_car_button = types.KeyboardButton('Выдвинуться на точку разгрузки')
-        markup.row(driver_loading_car_button)
-    elif driver_state.data[0]['state_id'] == 3:
-        driver_loading_car_button = types.KeyboardButton('Разгрузка автомобиля')
-        markup.row(driver_loading_car_button)
-    elif driver_state.data[0]['state_id'] == 4:
-        driver_loading_car_button = types.KeyboardButton('Завершить заказ')
-        markup.row(driver_loading_car_button)
-    elif driver_state.data[0]['state_id'] == 5:
-        driver_take_order_button = types.KeyboardButton('Еду на загрузку')
-        markup.row(driver_take_order_button)
+        safe_send_message(message.chat.id, 'Перед началом работы начните смену!')
+    else:
+        driver_finish_button = types.KeyboardButton('Завершить смену 🏁')
+        driver_сancel_order_button = types.KeyboardButton('Отменить заказ ❌')
 
-    safe_send_message(message.chat.id, 'Выберите действие', reply_markup=markup)
+        if driver_state.data[0]['state_id'] == 1:
+            driver_loading_car_button = types.KeyboardButton('Перейти к этапу загрузки автомобиля')
+            markup.row(driver_loading_car_button)
+            markup.row(driver_сancel_order_button)
+        elif driver_state.data[0]['state_id'] == 2:
+            driver_loading_car_button = types.KeyboardButton('Выдвинуться на точку разгрузки')
+            markup.row(driver_loading_car_button)
+            markup.row(driver_сancel_order_button)
+        elif driver_state.data[0]['state_id'] == 3:
+            driver_loading_car_button = types.KeyboardButton('Разгрузка автомобиля')
+            markup.row(driver_loading_car_button)
+            markup.row(driver_сancel_order_button)
+        elif driver_state.data[0]['state_id'] == 4:
+            driver_loading_car_button = types.KeyboardButton('Завершить заказ')
+            markup.row(driver_loading_car_button)
+            markup.row(driver_сancel_order_button)
+        elif driver_state.data[0]['state_id'] == 5:
+            driver_take_order_button = types.KeyboardButton('Взять заказ')
+            markup.row(driver_take_order_button)
+            markup.row(driver_finish_button)
+
+
+
+    safe_send_message(message.chat.id, 'Выберите действие: ', reply_markup=markup)
     bot.register_next_step_handler(message, lambda msg: on_click_driver_panel(msg, driver_panel))
