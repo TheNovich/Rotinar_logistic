@@ -5,7 +5,7 @@ from telebot import types
 
 '''Импорт библиотеки для работы с БД sql SupaBase'''
 from supabase import create_client
-from Rotinar_logistic.config import config
+from config import config
 
 # Конфигурация
 url = config.SUPABASE_URL
