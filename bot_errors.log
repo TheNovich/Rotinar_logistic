@@ -4132,3 +4132,11 @@ httpx.ReadError: [WinError 10035] ќпераци€ на незаблокированном сокете не может 
 2025-08-16 16:46:54,389 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.7152757745 "HTTP/2 200 OK"
 2025-08-16 16:46:54,483 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.7152757745 "HTTP/2 200 OK"
 2025-08-16 16:46:54,594 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.7152757745 "HTTP/2 200 OK"
+2025-08-17 13:06:36,793 - INFO - Starting bot polling...
+2025-08-17 13:06:42,706 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=telegram_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-17 13:06:42,981 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-17 13:06:43,338 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-17 13:06:44,630 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=telegram_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-17 13:06:44,752 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-17 13:06:45,162 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-17 13:07:59,093 - INFO - Starting bot polling...
