@@ -4156,3 +4156,17 @@ httpx.ReadError: [WinError 10035] ќпераци€ на незаблокированном сокете не может 
 2025-08-17 13:26:01,922 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.719374436 "HTTP/2 200 OK"
 2025-08-17 13:26:02,114 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.719374436 "HTTP/2 200 OK"
 2025-08-17 13:26:02,362 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.719374436 "HTTP/2 200 OK"
+2025-08-17 14:36:39,346 - INFO - Starting bot polling...
+2025-08-17 14:36:47,535 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=telegram_id&telegram_id=eq.694896982 "HTTP/2 200 OK"
+2025-08-17 14:36:47,768 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.694896982 "HTTP/2 200 OK"
+2025-08-17 14:36:48,256 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.694896982 "HTTP/2 200 OK"
+2025-08-17 14:36:48,357 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=is_on_shift&telegram_id=eq.694896982 "HTTP/2 200 OK"
+2025-08-17 14:36:48,591 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=state_id&telegram_id=eq.694896982 "HTTP/2 200 OK"
+2025-08-17 14:46:51,470 - INFO - Starting bot polling...
+2025-08-17 14:47:19,554 - INFO - Starting bot polling...
+2025-08-17 14:47:27,672 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=telegram_id&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-17 14:47:27,852 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-17 14:47:28,239 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-17 14:47:32,024 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=last_name%2Cfirst_name%2Csurname%2Cphone_number%2Cstate_id&role=eq.driver&is_on_shift=eq.True&state_id=in.%281%2C2%2C3%2C4%2C5%29 "HTTP/2 200 OK"
+2025-08-17 14:47:32,479 - INFO - HTTP Request: GET https://desgxzdvmuwywlfguzpz.supabase.co/rest/v1/users?select=role&telegram_id=eq.1893888757 "HTTP/2 200 OK"
+2025-08-17 14:47:42,894 - INFO - Starting bot polling...

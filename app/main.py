@@ -3,6 +3,14 @@ import telebot
 from telebot.types import Message
 from telebot import types
 
+import sys
+import os
+
+# Получаем путь к корню проекта (папка Rotinar)
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 '''Импорт библиотеки для работы с БД sql SupaBase'''
 from supabase import create_client
 from config import config
