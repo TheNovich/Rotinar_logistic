@@ -96,6 +96,8 @@ def driver_panel(message):
     else:
         driver_finish_button = types.KeyboardButton('Завершить смену 🏁')
         driver_сancel_order_button = types.KeyboardButton('Отменить заказ ❌')
+        driver_break_button = types.KeyboardButton('Перерыв ⏸️')
+        driver_end_break = types.KeyboardButton('Завершить перерыв ▶️')
 
         if driver_state.data[0]['state_id'] == 1:
             driver_loading_car_button = types.KeyboardButton('Перейти к этапу загрузки автомобиля')
@@ -116,6 +118,9 @@ def driver_panel(message):
         elif driver_state.data[0]['state_id'] == 5:
             driver_take_order_button = types.KeyboardButton('Взять заказ')
             markup.row(driver_take_order_button)
+            markup.row(driver_finish_button, driver_break_button)
+        elif driver_state.data[0]['state_id'] == 6:
+            markup.row(driver_end_break)
             markup.row(driver_finish_button)
 
 

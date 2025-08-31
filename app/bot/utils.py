@@ -111,6 +111,10 @@ def on_click_driver_panel(message, driver_panel):
         driver_next_status(message, 5, 'Вы успешно завершили заказ. \nОжидайте поступления нового заказа')
     elif message.text == 'Отменить заказ ❌':
         driver_next_status(message,5, 'Заказ отменён, ваш статус "Свободен"')
+    elif message.text == 'Перерыв ⏸️':
+        driver_next_status(message, 6, 'Вы находитесь на перерыве')
+    elif message.text == 'Завершить перерыв ▶️':
+        driver_next_status(message, 5, 'Перерыв завершён, ваш статус "Свободен"')
 
 
     driver_panel(message)
@@ -187,7 +191,7 @@ def on_click_manager_panel(message, manager_panel):
             .select('last_name', 'first_name', 'surname', 'phone_number', 'state_id') \
             .eq('role', 'driver') \
             .eq('is_on_shift', True) \
-            .in_('state_id', [1, 2, 3, 4, 5]) \
+            .in_('state_id', [1, 2, 3, 4, 5, 6]) \
             .execute()
 
         status_names = {
@@ -195,7 +199,8 @@ def on_click_manager_panel(message, manager_panel):
             2: "Погрузка автомобиля 🪝",
             3: "Едет на выгрузку 🚨",
             4: "Выгрузка автомобиля 🔄",
-            5: "Свободен ✅"
+            5: "Свободен ✅",
+            6: "Перерыв ⏸️"
         }
 
         drivers_list = []
