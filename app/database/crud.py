@@ -25,3 +25,25 @@ def update_data_tg_id(table, data, phone):
 def search_number(phone):
     response = supabase.table('users').select('phone_number', count='exact').eq('phone_number', phone).execute()
     return response.count
+
+
+def create_user(phone_number, first_name, last_name, surname, role):
+    user_data = {
+        'phone_number': phone_number,
+        'first_name': first_name,
+        'last_name': last_name,
+        'surname': surname,
+        'role': role
+    }
+
+    # Добавляем поля по умолчанию для водителей
+    if role == 'driver':
+        user_data['state_id'] = 5
+        user_data['is_on_shift'] = False
+
+    response = supabase.table('users').insert(user_data).execute()
+    return response
+
+def delete_user_db(phone_number):
+    response = supabase.table('users').delete().eq('phone_number', phone_number).execute()
+    return response

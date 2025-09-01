@@ -3,6 +3,11 @@ import telebot
 from telebot.types import Message
 from telebot import types
 
+from fastapi import FastAPI, Request, HTTPException
+import uvicorn
+from dotenv import load_dotenv
+WEBHOOK_URL = f"https://rotinarbot.ddns.net/webhook"
+
 import sys
 import os
 
@@ -29,7 +34,7 @@ from requests.exceptions import ConnectionError as RequestsConnectionError
 from app.bot.instance import bot
 from app.bot.handlers import start_handler, driver_panel, manager_panel
 
-# Настройка логирования
+'''# Настройка логирования
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -39,6 +44,7 @@ logging.basicConfig(
     ]
 )
 
+app = FastAPI()
 
 def robust_polling():
     """Устойчивый запуск бота с обработкой сетевых ошибок"""
@@ -72,4 +78,50 @@ if __name__ == '__main__':
     # Ваша инициализация бота и обработчиков
 
     # Запускаем устойчивый polling
-    robust_polling()
+    robust_polling()'''
+
+# Настройка логирования
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('bot_errors.log'),
+        logging.StreamHandler()
+    ]
+)
+
+app = FastAPI()
+
+@app.post("/webhook")
+async def process_webhook(request: Request):
+    # Проверка секретного токена
+    if request.headers.get("X-Telegram-Bot-Api-Secret-Token") != config.WEBHOOK_SECRET:
+        raise HTTPException(status_code=403, detail="Forbidden")
+
+    try:
+        json_data = await request.json()
+        update = telebot.types.Update.de_json(json_data)
+        bot.process_new_updates([update])
+        return {"status": "ok"}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.get("/")
+async def root():
+    return {"message": "Telegram Bot is running!"}
+
+
+@app.on_event("startup")
+async def on_startup():
+    # Установка webhook при запуске приложения
+    bot.remove_webhook()
+    bot.set_webhook(
+        url=WEBHOOK_URL,
+        secret_token=config.WEBHOOK_SECRET
+    )
+    print("Webhook установлен!")
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
