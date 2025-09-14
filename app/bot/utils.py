@@ -81,20 +81,20 @@ def role_required(*allowed_roles):
     return decorator
 
 'Функция регистрации проверяет валидирует формат введённого номера телефона и проверяет есть ли он в бд'
-def process_phone(message, driver_panel, manager_panel):
+def process_phone(message, driver_panel, manager_panel, admin_panel):
     phone = message.text
     if not phone.isdigit() or len(phone) != 11:
         safe_send_message(message.chat.id, '❌ Неверный формат! Попробуйте ещё раз.')
-        registration(message, driver_panel, manager_panel)
+        registration(message, driver_panel, manager_panel, admin_panel)
     elif search_number(phone) == 0:
         safe_send_message(message.chat.id, '❌ Номер не найден в системе!')
-        registration(message, driver_panel, manager_panel)
+        registration(message, driver_panel, manager_panel, admin_panel)
     else:
         update_data_tg_id('users', {
             'telegram_id': message.from_user.id,
             'telegram_name': message.from_user.username
         }, phone)
-        user_verification(message, driver_panel, manager_panel)
+        user_verification(message, driver_panel, manager_panel, admin_panel)
 
 
 def on_click_driver_panel(message, driver_panel):
@@ -138,10 +138,10 @@ def finish_driver_shift(message):
     switch_driver_status(5, tg_id)
     safe_send_message(tg_id, 'Смена завершена!')
 
-def registration(message, driver_panel, manager_panel):
+def registration(message, driver_panel, manager_panel, admin_panel):
     msg = safe_send_message(message.chat.id,
                            'Введите номер телефона в формате 89991112233 (без пробелов и спецсимволов):')
-    bot.register_next_step_handler(msg, lambda msg: process_phone(msg, driver_panel, manager_panel))
+    bot.register_next_step_handler(msg, lambda msg: process_phone(msg, driver_panel, manager_panel, admin_panel))
 
 def role_commands(message, role, driver_panel, manager_panel, admin_panel):
     if role == 'driver':
